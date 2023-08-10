@@ -115,6 +115,7 @@ function loadQuestion() {
     for (let i = 0; i < 4; i++) {
         buttons[i].innerHTML = possibilities[i];
         buttons[i].value = possibilities[i];
+        buttons[i].title = stacks[possibilities[i]];
     }
 
     // Get question
