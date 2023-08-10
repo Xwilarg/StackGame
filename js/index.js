@@ -1,18 +1,34 @@
 const stacks = {
-    "it": [
+    "Computer": [
         "stackoverflow",
         "electronics.stackexchange",
         "tex.stackexchange",
         "mathoverflow",
         "codegolf.stackexchange",
-        "crypto.stackexchange.com"
+        "crypto.stackexchange.com",
+        "superuser",
+        "langdev.stackexchange",
+        "puzzling.stackexchange",
+        "stats.stackexchange"
     ],
-    "fiction": [
+    "Culture": [
         "movies.stackexchange",
-        "worldbuilding.stackexchange",
         "rpg.stackexchange",
-        "writing.stackexchange"
+        "writing.stackexchange",
+        "skeptics.stackexchange",
+        "travel.stackexchange",
+        "worldbuilding.stackexchange"
+    ],
+    "Science": [
+        "politics.stackexchange",
+        "law.stackexchange",
+        "academia.stackexchange",
+        "astronomy.stackexchange"
     ]
+    /*
+    "retrocomputing.stackexchange"
+    "latin.stackexchange"
+    */
 };
 
 let answer = null;
@@ -25,16 +41,32 @@ async function getNextQuestionAsync(stack) {
     return json[Math.floor(Math.random() * json.length)].title;
 }
 
+function randomStack() {
+    return Object.keys(stacks)[Math.floor(Math.random() * Object.keys(stacks).length)];
+}
+
+function randomChoice(stack) {
+    if (stack === null) {
+        stack = randomStack();
+    }
+    return stacks[stack][Math.floor(Math.random() * stacks[stack].length)];
+}
+
 function loadQuestion() {
     // Get right answer
-    const category = Object.keys(stacks)[Math.floor(Math.random() * Object.keys(stacks).length)];
+    const category =
+        Math.floor(Math.random() * 5) === 0
+        ? null
+        : randomStack();
+    document.getElementById("theme").innerHTML = `Theme: ${category == null ? "None" : category}`;
+
     let possibilities = [];
-    answer = stacks[category][Math.floor(Math.random() * stacks[category].length)];
+    answer = randomChoice(category);
     possibilities.push(answer);
 
     // Fill others answers
     while (possibilities.length < 4) {
-        const val = stacks[category][Math.floor(Math.random() * stacks[category].length)];
+        const val = randomChoice(category);
         if (!possibilities.includes(val)) {
             possibilities.push(val);
         }
@@ -69,6 +101,7 @@ addEventListener("load", () => {
                 answer === e.target.value
                 ? `The answer was indeed ${answer}`
                 : `Wrong, the answer was ${answer}`;
+                document.getElementById("result-sub").innerHTML = `Origin question: ${document.getElementById("question").innerHTML}`;
             answer = null;
             loadQuestion();
         });
