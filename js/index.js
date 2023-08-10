@@ -97,11 +97,14 @@ const categories = {
 let answer = null;
 let buttons = [];
 
+let question = null;
+let link = null;
+
 async function getNextQuestionAsync(stack) {
     const content = await fetch(`https://api.stackexchange.com/2.3/questions?pagesize=100&site=${stack}`)
         .then(resp => resp.json());
     const json = content.items;
-    return json[Math.floor(Math.random() * json.length)].title;
+    return json[Math.floor(Math.random() * json.length)];
 }
 
 function randomStack() {
@@ -148,8 +151,10 @@ function loadQuestion() {
     }
 
     // Get question
-    getNextQuestionAsync(answer).then((title) => {
-        document.getElementById("question").innerHTML = title;
+    getNextQuestionAsync(answer).then((elem) => {
+        question = elem.title;
+        link = elem.link;
+        document.getElementById("question").innerHTML = elem.title;
     });
 }
 
@@ -165,7 +170,7 @@ addEventListener("load", () => {
                 answer === e.target.value
                 ? `The answer was indeed ${answer}`
                 : `Wrong, the answer was ${answer}`;
-                document.getElementById("result-sub").innerHTML = `Origin question: ${document.getElementById("question").innerHTML}`;
+                document.getElementById("result-sub").innerHTML = `Origin question: <a href="${link}" target="_blank">${question}</a>`;
             answer = null;
             loadQuestion();
         });
