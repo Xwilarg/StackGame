@@ -1,11 +1,15 @@
-const stacks = [
-    "stackoverflow",
-    "electronics.stackexchange",
-    "tex.stackexchange",
-    "mathoverflow"
-];
+const stacks = {
+    "it": [
+        "stackoverflow",
+        "electronics.stackexchange",
+        "tex.stackexchange",
+        "mathoverflow",
+        "codegolf.stackexchange"
+    ]
+};
 
 let answer = null;
+let buttons = [];
 
 async function getNextQuestionAsync(stack) {
     const content = await fetch(`https://api.stackexchange.com/2.3/questions?pagesize=100&site=${stack}`)
@@ -15,7 +19,32 @@ async function getNextQuestionAsync(stack) {
 }
 
 function loadQuestion() {
-    answer = stacks[Math.floor(Math.random() * stacks.length)];
+    // Get right answer
+    const category = "it";
+    let possibilities = [];
+    answer = stacks[category][Math.floor(Math.random() * stacks[category].length)];
+    possibilities.push(answer);
+
+    // Fill others answers
+    while (possibilities.length < 4) {
+        const val = stacks[category][Math.floor(Math.random() * stacks[category].length)];
+        if (!possibilities.includes(val)) {
+            possibilities.push(val);
+        }
+    }
+
+    // Shuffle
+    possibilities = possibilities
+        .map(value => ({ value, sort: Math.random() }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(({ value }) => value);
+    
+    for (let i = 0; i < 4; i++) {
+        buttons[i].innerHTML = possibilities[i];
+        buttons[i].value = possibilities[i];
+    }
+
+    // Get question
     getNextQuestionAsync(answer).then((title) => {
         document.getElementById("question").innerHTML = title;
     });
@@ -23,22 +52,20 @@ function loadQuestion() {
 
 addEventListener("load", () => {
     const btnContainer = document.getElementById("choices");
-    for (const link of stacks) {
-        const val = link;
-
+    for (let i = 0; i < 4; i++) {
         const btn = document.createElement("button");
-        btn.innerHTML = val;
-        btn.addEventListener("click", () => {
+        btn.addEventListener("click", (e) => {
             if (answer === null) {
                 return;
             }
             document.getElementById("result").innerHTML =
-                answer === val
+                answer === e.target.value
                 ? `The answer was indeed ${answer}`
                 : `Wrong, the answer was ${answer}`;
             answer = null;
             loadQuestion();
         });
+        buttons.push(btn);
         btnContainer.appendChild(btn);
     }
 
