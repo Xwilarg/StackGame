@@ -1,33 +1,67 @@
 const stacks = {
+    "stackoverflow": "professional and enthusiast programmers",
+    "electronics.stackexchange": "electronics and electrical engineering professionals, students, and enthusiasts",
+    "tex.stackexchange": "users of TeX, LaTeX, ConTeXt, and related typesetting systems",
+    "mathoverflow": "professional mathematicians",
+    "codegolf.stackexchange": "programming puzzle enthusiasts and code golfers",
+    "crypto.stackexchange" : "software developers, mathematicians and others interested in cryptography",
+    "superuser": "computer enthusiasts and power users",
+    "langdev.stackexchange": "designers and implementers of computer programming languages",
+    "puzzling.stackexchange": "those who create, solve, and study puzzles",
+    "stats.stackexchange": "people interested in statistics, machine learning, data analysis, data mining, and data visualization",
+    "movies.stackexchange": "movie and TV enthusiasts",
+    "rpg.stackexchange": "gamemasters and players of tabletop, paper-and-pencil role-playing games",
+    "writing.stackexchange": "the craft of professional writing, including fiction, non-fiction, technical, scholarly, and commercial writing",
+    "skeptics.stackexchange": "scientific skepticism",
+    "travel.stackexchange": "road warriors and seasoned travelers",
+    "worldbuilding.stackexchange": "writers/artists using science, geography and culture to construct imaginary worlds and settings",
+    "politics.stackexchange": "people interested in governments, policies, and political processes",
+    "law.stackexchange": "legal professionals, students, and others with experience or interest in law",
+    "academia.stackexchange": "academics and those enrolled in higher education",
+    "astronomy.stackexchange": "astronomers and astrophysicists"
+}
+
+const categories = {
+    // Main Categories
     "Computer": [
         "stackoverflow",
-        "electronics.stackexchange",
-        "tex.stackexchange",
-        "mathoverflow",
         "codegolf.stackexchange",
-        "crypto.stackexchange.com",
         "superuser",
         "langdev.stackexchange",
-        "puzzling.stackexchange",
-        "stats.stackexchange"
-    ],
-    "Culture": [
-        "movies.stackexchange",
-        "rpg.stackexchange",
-        "writing.stackexchange",
-        "skeptics.stackexchange",
-        "travel.stackexchange",
-        "worldbuilding.stackexchange"
     ],
     "Science": [
+        "astronomy.stackexchange",
+        "electronics.stackexchange",
+        "stats.stackexchange",
+        "tex.stackexchange",
+        "mathoverflow",
+        "crypto.stackexchange.com",
+    ],
+    "Letters": [
         "politics.stackexchange",
         "law.stackexchange",
         "academia.stackexchange",
-        "astronomy.stackexchange"
+        "skeptics.stackexchange",
+    ],
+    "Fiction": [
+        "movies.stackexchange",
+        "rpg.stackexchange",
+        "writing.stackexchange",
+        "worldbuilding.stackexchange"
+    ],
+
+    // Mix
+    "Fiction vs Reality": [
+        "worldbuilding.stackexchange",
+        "rpg.stackexchange",
+        "skeptics.stackexchange",
+        "law.stackexchange"
     ]
     /*
     "retrocomputing.stackexchange"
     "latin.stackexchange"
+    "puzzling.stackexchange"
+        "travel.stackexchange",
     */
 };
 
@@ -42,14 +76,14 @@ async function getNextQuestionAsync(stack) {
 }
 
 function randomStack() {
-    return Object.keys(stacks)[Math.floor(Math.random() * Object.keys(stacks).length)];
+    return Object.keys(categories)[Math.floor(Math.random() * Object.keys(categories).length)];
 }
 
 function randomChoice(stack) {
     if (stack === null) {
-        stack = randomStack();
+        return Object.keys(stacks)[Math.floor(Math.random() * Object.keys(stacks).length)]
     }
-    return stacks[stack][Math.floor(Math.random() * stacks[stack].length)];
+    return categories[stack][Math.floor(Math.random() * categories[stack].length)];
 }
 
 function loadQuestion() {
