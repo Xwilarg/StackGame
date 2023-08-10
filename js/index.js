@@ -4,7 +4,14 @@ const stacks = {
         "electronics.stackexchange",
         "tex.stackexchange",
         "mathoverflow",
-        "codegolf.stackexchange"
+        "codegolf.stackexchange",
+        "crypto.stackexchange.com"
+    ],
+    "fiction": [
+        "movies.stackexchange",
+        "worldbuilding.stackexchange",
+        "rpg.stackexchange",
+        "writing.stackexchange"
     ]
 };
 
@@ -20,7 +27,7 @@ async function getNextQuestionAsync(stack) {
 
 function loadQuestion() {
     // Get right answer
-    const category = "it";
+    const category = Object.keys(stacks)[Math.floor(Math.random() * Object.keys(stacks).length)];
     let possibilities = [];
     answer = stacks[category][Math.floor(Math.random() * stacks[category].length)];
     possibilities.push(answer);
