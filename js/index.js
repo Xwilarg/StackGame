@@ -18,7 +18,17 @@ const stacks = {
     "politics.stackexchange": "people interested in governments, policies, and political processes",
     "law.stackexchange": "legal professionals, students, and others with experience or interest in law",
     "academia.stackexchange": "academics and those enrolled in higher education",
-    "astronomy.stackexchange": "astronomers and astrophysicists"
+    "astronomy.stackexchange": "astronomers and astrophysicists",
+    "philosophy.stackexchange": "those interested in the study of the fundamental nature of knowledge, reality, and existence",
+    "german.stackexchange": "speakers of all levels who want to share and increase their knowledge of the German language",
+    "french.stackexchange": "students, teachers, and linguists wanting to discuss the finer points of the French language",
+    "japanese.stackexchange": "students, teachers, and linguists wanting to discuss the finer points of the Japanese language",
+    "chinese.stackexchange": "students, teachers, and linguists wanting to discuss the finer points of the Chinese language",
+    "korean.stackexchange": "linguists, teachers and students of the Korean language",
+    "workplace.stackexchange": "members of the workforce navigating the professional setting",
+    "physics.stackexchange": "active researchers, academics and students of physics",
+    "parenting.stackexchange": "parents, grandparents, nannies and others with a parenting role",
+    "latin.stackexchange": "linguists, teachers, and students wanting to discuss the finer points of the Latin language"
 }
 
 const categories = {
@@ -28,20 +38,32 @@ const categories = {
         "codegolf.stackexchange",
         "superuser",
         "langdev.stackexchange",
+        "tex.stackexchange"
     ],
     "Science": [
         "astronomy.stackexchange",
         "electronics.stackexchange",
         "stats.stackexchange",
-        "tex.stackexchange",
         "mathoverflow",
-        "crypto.stackexchange.com",
+        "crypto.stackexchange",
+        "physics.stackexchange"
     ],
-    "Letters": [
+    "Languages": [
+        "german.stackexchange",
+        "french.stackexchange",
+        "japanese.stackexchange",
+        "chinese.stackexchange",
+        "english.stackexchange",
+        "latin.stackexchange"
+    ],
+    "Society": [
+        "workplace.stackexchange",
+        "parenting.stackexchange",
+        "academia.stackexchange",
         "politics.stackexchange",
         "law.stackexchange",
-        "academia.stackexchange",
         "skeptics.stackexchange",
+        "philosophy.stackexchange",
     ],
     "Fiction": [
         "movies.stackexchange",
@@ -55,13 +77,20 @@ const categories = {
         "worldbuilding.stackexchange",
         "rpg.stackexchange",
         "skeptics.stackexchange",
-        "law.stackexchange"
+        "law.stackexchange",
+        "philosophy.stackexchange",
+        "physics.stackexchange"
     ]
     /*
     "retrocomputing.stackexchange"
     "latin.stackexchange"
     "puzzling.stackexchange"
         "travel.stackexchange",
+        retrocomputing.stackexchange
+        aviation.stackexchange
+        diy.stackexchange
+        hinduism.stackexchange
+        latin.stackexchange
     */
 };
 
